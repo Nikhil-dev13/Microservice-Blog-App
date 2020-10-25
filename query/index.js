@@ -9,10 +9,12 @@ app.use(cors());
 
 const posts = {};
 
+//Get all the posts
 app.get("/posts", (req, res) => {
   res.send(posts);
 });
 
+//Event Handler
 app.post("/events", (req, res) => {
   const { type, data } = req.body;
 

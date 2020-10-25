@@ -11,10 +11,12 @@ app.use(cors());
 
 const commentsByPostId = {};
 
+//Get all the comments
 app.get("/posts/:id/comments", (req, res) => {
   res.send(commentsByPostId[req.params.id] || []);
 });
 
+//Create comments for a post
 app.post("/posts/:id/comments", async (req, res) => {
   const commentId = randomBytes(4).toString("hex");
   const { content } = req.body;
@@ -25,6 +27,7 @@ app.post("/posts/:id/comments", async (req, res) => {
 
   commentsByPostId[req.params.id] = comments;
 
+  //Emit event
   await axios.post("http://localhost:4005/events", {
     type: "CommentCreated",
     data: {
@@ -38,6 +41,7 @@ app.post("/posts/:id/comments", async (req, res) => {
   res.status(201).send(comments);
 });
 
+//Event Handler
 app.post("/events", async (req, res) => {
   console.log("Event Received: ", req.body.type);
 

@@ -40,7 +40,7 @@ app.post("/events", (req, res) => {
 
     const post = posts[postId];
 
-    const comment = post.comment.find((comment) => {
+    const comment = post.comments.find((comment) => {
       return comment.id === id;
     });
     comment.status = status;

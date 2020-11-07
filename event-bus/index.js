@@ -10,7 +10,7 @@ const events = [];
 
 app.post("/events", (req, res) => {
   const event = req.body;
-
+//Add a event to events array
   events.push(event);
 
   try {

@@ -59,7 +59,7 @@ app.post("/events", (req, res) => {
 //Call event bus for events after startup
 app.listen(4002, async () => {
   console.log("Listening on 4002");
-
+//Require all the events created before the query service startup
   const res = await axios.get("http://localhost:4005/events");
 
   for (let event of res.data) {
